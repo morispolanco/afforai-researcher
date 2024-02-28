@@ -35,9 +35,10 @@ history = [{"role": role, "content": content}]
 # Realizar la solicitud a la API utilizando los valores predeterminados
 result = get_completion_result(default_api_key, default_session_id, history, powerful, google)
 
-# Mostrar el resultado si está disponible
+# Mostrar el resultado formateado si está disponible
 if result:
-    st.write('Result:')
-    st.json(result)
+    st.markdown('### Resultado:')
+    for item in result:
+        st.markdown(f"- **{item}**: {result[item]}")
 else:
     st.write('Error: Failed to fetch result from the API')
