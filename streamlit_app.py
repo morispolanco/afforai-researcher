@@ -2,12 +2,12 @@ import streamlit as st
 import requests
 
 # Función para realizar la solicitud a la API
-def get_completion_result(api_key, session_id, history, powerful, google):
+def get_completion_result(api_key, session_id, content, powerful, google):
     url = "https://api.afforai.com/api/api_completion"
     payload = {
         "apiKey": api_key,
         "sessionID": session_id,
-        "history": history,
+        "history": [{"role": "user", "content": content}],
         "powerful": powerful,
         "google": google
     }
@@ -25,25 +25,19 @@ default_api_key = "fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e"
 default_session_id = "65deb80c5b0fa2b25f3216b7"
 
 # Definir parámetros de entrada
-role = st.selectbox('Role', ['user', 'assistant'])
 content = st.text_input('Content')
 powerful = st.checkbox('Powerful')
 google = st.checkbox('Google')
 
 # Si se ha proporcionado una API Key y un Session ID, mostrar el botón "Obtener Respuesta"
 if st.button('Obtener Respuesta'):
-    history = [{"role": role, "content": content}]
-    
     # Realizar la solicitud a la API utilizando los valores predeterminados
-    result = get_completion_result(default_api_key, default_session_id, history, powerful, google)
+    result = get_completion_result(default_api_key, default_session_id, content, powerful, google)
 
     # Mostrar el resultado formateado si está disponible
     if result:
         st.markdown('### Resultado:')
-        html_result = "<table><tr><th>Clave</th><th>Valor</th></tr>"
         for key, value in result.items():
-            html_result += f"<tr><td>{key}</td><td>{value}</td></tr>"
-        html_result += "</table>"
-        st.write(html_result, unsafe_allow_html=True)
+            st.write(f"{key}: {value}")
     else:
         st.write('Error: Failed to fetch result from the API')
