@@ -20,9 +20,13 @@ def get_completion_result(api_key, session_id, history, powerful, google):
 # Configuración de la aplicación Streamlit
 st.title('Afforai API Demo')
 
+# Valores predeterminados para la API Key y Session ID
+default_api_key = "fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e"
+default_session_id = "65deb80c5b0fa2b25f3216b7"
+
 # Parámetros de entrada
-api_key = st.text_input('API Key')
-session_id = st.text_input('Session ID')
+api_key = st.text_input('API Key', default_api_key)
+session_id = st.text_input('Session ID', default_session_id)
 role = st.selectbox('Role', ['user', 'assistant'])
 content = st.text_input('Content')
 powerful = st.checkbox('Powerful')
