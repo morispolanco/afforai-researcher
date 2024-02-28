@@ -25,8 +25,8 @@ default_api_key = "fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e"
 default_session_id = "65deb80c5b0fa2b25f3216b7"
 
 # Parámetros de entrada
-api_key = st.text_input('API Key', default_api_key)
-session_id = st.text_input('Session ID', default_session_id)
+api_key = st.text_input('API Key', default_api_key, type='password')
+session_id = st.text_input('Session ID', default_session_id, type='password')
 role = st.selectbox('Role', ['user', 'assistant'])
 content = st.text_input('Content')
 powerful = st.checkbox('Powerful')
