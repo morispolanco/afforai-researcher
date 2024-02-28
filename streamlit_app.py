@@ -1,41 +1,43 @@
 import streamlit as st
 import requests
-import json
 
-# Define la URL de la API
-url = "https://api.afforai.com/api/api_completion"
-
-# Define los headers para la solicitud
-headers = {
-    "Content-Type": "application/json",
-    "apiKey": "fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e",
-    "sessionID": "65deb80c5b0fa2b25f3216b7"
-}
-
-def get_answer(question):
-    # Define el cuerpo de la solicitud
-    data = {
-        "history": [{"role": "user", "content": question}],
-        "powerful": True,
-        "google": True
+# Función para realizar la solicitud a la API
+def get_completion_result(api_key, session_id, history, powerful, google):
+    url = "https://api.afforai.com/api/api_completion"
+    payload = {
+        "apiKey": fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e,
+        "sessionID": 65deb80c5b0fa2b25f3216b7,
+        "history": history,
+        "powerful": powerful,
+        "google": google
     }
-
-    # Realiza la solicitud POST a la API
-    response = requests.post(url, headers=headers, data=json.dumps(data))
-
-    # Si la solicitud fue exitosa, devuelve la respuesta
+    response = requests.post(url, json=payload)
     if response.status_code == 200:
-        return response.json()["choices"][0]["message"]["content"]
+        return response.json()
     else:
-        return "Lo siento, no pude obtener una respuesta."
+        return None
 
-def main():
-    st.title("Aplicación de preguntas y respuestas")
+# Configuración de la aplicación Streamlit
+st.title('Afforai API Demo')
 
-    question = st.text_input("Escribe tu pregunta aquí:")
-    if st.button("Obtener respuesta"):
-        answer = get_answer(question)
-        st.write(answer)
+# Parámetros de entrada
+api_key = st.text_input('API Key')
+session_id = st.text_input('Session ID')
+role = st.selectbox('Role', ['user', 'assistant'])
+content = st.text_input('Content')
+powerful = st.checkbox('Powerful')
+google = st.checkbox('Google')
 
-if __name__ == "__main__":
-    main()
+history = [{"role": role, "content": content}]
+
+# Si se ha proporcionado una API Key y un Session ID, realizar la solicitud a la API
+if st.button('Get Completion'):
+    if api_key and session_id:
+        result = get_completion_result(api_key, session_id, history, powerful, google)
+        if result:
+            st.write('Result:')
+            st.json(result)
+        else:
+            st.write('Error: Failed to fetch result from the API')
+    else:
+        st.write('Please provide API Key and Session ID')
