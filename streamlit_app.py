@@ -38,6 +38,6 @@ if st.button('Obtener Respuesta'):
     if result:
         st.markdown('### Resultado:')
         for key, value in result.items():
-            st.write(f"**{key}:** {value}")
+            st.markdown(f"**{key}:** {value}<br>", unsafe_allow_html=True)
     else:
         st.write('Error: Failed to fetch result from the API')
