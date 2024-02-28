@@ -16,8 +16,8 @@ def get_answer(question):
     # Define el cuerpo de la solicitud
     data = {
         "history": [{"role": "user", "content": question}],
-        "powerful": False,
-        "google": False
+        "powerful": True,
+        "google": True
     }
 
     # Realiza la solicitud POST a la API
