@@ -5,8 +5,8 @@ import requests
 def get_completion_result(api_key, session_id, history, powerful, google):
     url = "https://api.afforai.com/api/api_completion"
     payload = {
-        "apiKey": fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e,
-        "sessionID": 65deb80c5b0fa2b25f3216b7,
+        "apiKey": api_key,
+        "sessionID": session_id,
         "history": history,
         "powerful": powerful,
         "google": google
