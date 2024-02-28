@@ -22,7 +22,7 @@ st.title('Afforai API Demo')
 
 # Valores predeterminados para la API Key y Session ID
 default_api_key = "fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e"
-default_session_id = "65deb80c5b0fa2b25f3216b7"
+default_session_id = "65489d7c9ad727940f2ab26f"
 
 # Definir parámetros de entrada
 content = st.text_area('Content', height=150)
