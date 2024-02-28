@@ -40,7 +40,10 @@ if st.button('Obtener Respuesta'):
     # Mostrar el resultado formateado si está disponible
     if result:
         st.markdown('### Resultado:')
-        for item in result:
-            st.markdown(f"<b>{item}</b>: {result[item]}", unsafe_allow_html=True)
+        html_result = "<table><tr><th>Clave</th><th>Valor</th></tr>"
+        for key, value in result.items():
+            html_result += f"<tr><td>{key}</td><td>{value}</td></tr>"
+        html_result += "</table>"
+        st.write(html_result, unsafe_allow_html=True)
     else:
         st.write('Error: Failed to fetch result from the API')
