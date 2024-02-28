@@ -25,7 +25,7 @@ default_api_key = "fcbfdfe8-e9ed-41f3-a7d8-b6587538e84e"
 default_session_id = "65deb80c5b0fa2b25f3216b7"
 
 # Definir parámetros de entrada
-content = st.text_input('Content')
+content = st.text_area('Content', height=150)
 powerful = st.checkbox('Powerful')
 google = st.checkbox('Google')
 
@@ -38,6 +38,6 @@ if st.button('Obtener Respuesta'):
     if result:
         st.markdown('### Resultado:')
         for key, value in result.items():
-            st.write(f"{key}: {value}")
+            st.markdown(f"**{key}:** {value}\n\n")
     else:
         st.write('Error: Failed to fetch result from the API')
